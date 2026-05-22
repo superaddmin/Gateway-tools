@@ -7,6 +7,12 @@ All notable changes to Gateway-tools will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.24.7] - 2026-05-22
+
+### Fixed
+- **Release workflow signing secrets now support both current and legacy Tauri names**: CI reads `TAURI_SIGNING_PRIVATE_KEY` or legacy `TAURI_PRIVATE_KEY`, plus the current and legacy password secret names, before normalizing and smoke-testing the updater key.
+
+---
 ## [0.24.6] - 2026-05-22
 
 ### Fixed

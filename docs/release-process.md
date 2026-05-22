@@ -35,8 +35,8 @@ GitHub Actions 发布工作流会构建 macOS、Windows 与 Linux 资产。macOS
 
 发布工作流要求仓库配置以下 GitHub Actions secrets：
 
-1. `TAURI_SIGNING_PRIVATE_KEY`：推荐填写 `tauri signer generate` 生成的私钥文件内容（原始 base64 文本）。如果误填了 base64 解码后的 `untrusted comment...` 明文，工作流会重新编码后再传给 Tauri。
-2. `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`：生成私钥时使用的密码；如果生成时为空，则该 secret 可为空。
+1. `TAURI_SIGNING_PRIVATE_KEY`：推荐填写 `tauri signer generate` 生成的私钥文件内容（原始 base64 文本）。如果误填了 base64 解码后的 `untrusted comment...` 明文，工作流会重新编码后再传给 Tauri。兼容旧 secret 名 `TAURI_PRIVATE_KEY`。
+2. `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`：生成私钥时使用的密码；如果生成时为空，则该 secret 可为空。兼容旧 secret 名 `TAURI_PRIVATE_KEY_PASSWORD` 与 `TAURI_KEY_PASSWORD`。
 
 工作流会先把私钥规范化并写入 runner 临时文件，执行一次 `tauri signer sign` 烟测，再交给 Tauri 生成 `.sig` updater artifacts 和最终 `latest.json`。
 

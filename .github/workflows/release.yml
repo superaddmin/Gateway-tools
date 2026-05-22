@@ -149,13 +149,13 @@ jobs:
         id: updater_signing_key
         shell: bash
         env:
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY || secrets.TAURI_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD || secrets.TAURI_PRIVATE_KEY_PASSWORD || secrets.TAURI_KEY_PASSWORD }}
         run: |
           set -euo pipefail
 
           if [ -z "${TAURI_SIGNING_PRIVATE_KEY:-}" ]; then
-            echo "TAURI_SIGNING_PRIVATE_KEY is required because bundle.createUpdaterArtifacts is enabled."
+            echo "TAURI_SIGNING_PRIVATE_KEY or legacy TAURI_PRIVATE_KEY is required because bundle.createUpdaterArtifacts is enabled."
             exit 1
           fi
 
@@ -209,7 +209,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ steps.updater_signing_key.outputs.key_path }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD || secrets.TAURI_PRIVATE_KEY_PASSWORD || secrets.TAURI_KEY_PASSWORD }}
         with:
           tagName: "v${{ steps.app_version.outputs.VERSION }}"
           releaseName: "Gateway-tools v${{ steps.app_version.outputs.VERSION }}"

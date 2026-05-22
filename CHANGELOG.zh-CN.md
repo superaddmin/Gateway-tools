@@ -7,6 +7,12 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
 ---
+## [0.24.7] - 2026-05-22
+
+### 修复
+- **发布工作流签名 secrets 现兼容 Tauri 新旧命名**：CI 会读取 `TAURI_SIGNING_PRIVATE_KEY` 或旧名 `TAURI_PRIVATE_KEY`，并兼容当前与旧版密码 secret 名，再规范化和烟测 updater 私钥。
+
+---
 ## [0.24.6] - 2026-05-22
 
 ### 修复
