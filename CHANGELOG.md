@@ -7,6 +7,18 @@ All notable changes to Gateway-tools will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.24.4] - 2026-05-22
+
+### Changed
+- **Project identity and release metadata now use Gateway-tools throughout**: package, Tauri, Rust, repository, issue, homepage, and documentation references now point to `superaddmin/Gateway-tools.git`.
+- **The UI system now has a documented compact application baseline**: `docs/ui-audit.md` records tokens, component density, responsive behavior, focus-visible rules, and reduced-motion guidance for future interface work.
+- **Dashboard and navigation density have been tightened for tool use**: overview cards now read as compact status panels, high-frequency hover motion is reduced, and sub-900px layouts use a real narrow navigation path.
+
+### Fixed
+- **Global focus-visible states now cover primary interactive controls**: buttons, inputs, selects, toolbar actions, and clickable cards expose a consistent keyboard focus treatment.
+- **Documentation now aligns with the current Gateway-tools codebase and release process**: docs content reflects the renamed project, current repository, compact UI conventions, and the actual local runtime data boundaries.
+
+---
 ## [0.24.3] - 2026-05-21
 
 ### Changed

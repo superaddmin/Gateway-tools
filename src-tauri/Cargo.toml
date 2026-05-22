@@ -1,6 +1,6 @@
 [package]
 name = "gateway-tools"
-version = "0.24.3"
+version = "0.24.4"
 description = "Gateway-tools"
 authors = ["superaddmin"]
 repository = "https://github.com/superaddmin/Gateway-tools.git"
