@@ -7,6 +7,12 @@ All notable changes to Gateway-tools will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.24.10] - 2026-05-23
+
+### Changed
+- **Rotated the Tauri updater public key**: `tauri.conf.json` now trusts the newly generated updater signing key pair. GitHub Actions must be configured with the matching private key before the next full updater release.
+
+---
 ## [0.24.9] - 2026-05-22
 
 ### Fixed

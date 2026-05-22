@@ -7,6 +7,12 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
 ---
+## [0.24.10] - 2026-05-23
+
+### 变更
+- **轮换 Tauri updater 公钥**：`tauri.conf.json` 现信任新生成的 updater 签名密钥对。下一次完整 updater 发布前，需要在 GitHub Actions 中配置匹配的私钥。
+
+---
 ## [0.24.9] - 2026-05-22
 
 ### 修复

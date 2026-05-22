@@ -64,24 +64,28 @@ function normalizeKey(raw) {
 
 function runSigner(keyPath, password, smokeFile) {
   fs.writeFileSync(smokeFile, 'tauri updater signing smoke test');
+  const tauriCli = require.resolve('@tauri-apps/cli/tauri.js');
 
   const args = [
-    'tauri',
+    tauriCli,
     'signer',
     'sign',
     '--private-key-path',
     keyPath,
-    '--password',
-    password || '',
     smokeFile,
   ];
 
-  return spawnSync('npx', args, {
+  if (password) {
+    args.splice(args.length - 1, 0, '--password', password);
+  }
+
+  return spawnSync(process.execPath, args, {
     cwd: process.cwd(),
     env: process.env,
     encoding: 'utf8',
     stdio: 'pipe',
-    shell: process.platform === 'win32',
+    shell: false,
+    timeout: 30_000,
   });
 }
 
@@ -112,6 +116,22 @@ function main() {
   fs.writeFileSync(keyPath, normalized.normalized);
 
   const result = runSigner(keyPath, password, smokeFile);
+  if (result.error && result.error.code === 'ETIMEDOUT') {
+    disable(
+      'smoke-sign-timeout',
+      'The updater signing smoke test timed out. If the key is encrypted, configure TAURI_SIGNING_PRIVATE_KEY_PASSWORD so the CLI does not wait for interactive password input.'
+    );
+    return;
+  }
+
+  if (result.error) {
+    disable(
+      'smoke-sign-spawn-failed',
+      `The updater signing smoke test could not start the Tauri CLI: ${result.error.message}`
+    );
+    return;
+  }
+
   if (result.status !== 0) {
     disable(
       'smoke-sign-failed',

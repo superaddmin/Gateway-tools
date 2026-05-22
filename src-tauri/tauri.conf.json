@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Gateway-tools",
-  "version": "0.24.9",
+  "version": "0.24.10",
   "identifier": "com.superaddmin.gateway-tools",
   "build": {
     "beforeDevCommand": "node scripts/prepare-tauri.cjs && npm run dev",
@@ -88,7 +88,7 @@
       }
     },
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEMxRkU1RTdBRDdCRUUzM0QKUldROTQ3N1hlbDcrd1ZVQ2E3b1ZoVUdXL3BWQmpjdzNnWllNUW1LNHVwcE9wdGI1Q1UxQmdnQ0oK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDMzMUQ2NENGODlFNjA2ODEKUldTQkJ1YUp6MlFkTTdmRHExSzhZbTg1Y3QvNHZvRVZYOVpNOUJpd3ppSEh2T21NT2srbk1pdHoK",
       "endpoints": [
         "https://github.com/superaddmin/Gateway-tools/releases/latest/download/latest.json"
       ]

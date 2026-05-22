@@ -42,6 +42,20 @@ GitHub Actions 发布工作流会构建 macOS、Windows 与 Linux 资产。macOS
 
 如果私钥缺失、格式错误或密码不匹配，Release workflow 会降级继续发布普通安装包，并跳过 updater `.sig` artifacts 与 `latest.json`。这种发布可以下载安装，但应用内自动更新不可用；修复 GitHub Secrets 后，下一次发布会自动恢复完整 updater 资产。
 
+当前 updater 公钥已在 `src-tauri/tauri.conf.json` 中轮换。匹配的新私钥生成在本机仓库外：
+
+```text
+C:\Users\iphon\Gateway-tools-updater-keys\gateway-tools-updater-private-v0.24.10.key
+```
+
+匹配的新密码生成在本机仓库外：
+
+```text
+C:\Users\iphon\Gateway-tools-updater-keys\gateway-tools-updater-private-v0.24.10.password.txt
+```
+
+将私钥文件内容完整复制到 GitHub Actions secret `TAURI_SIGNING_PRIVATE_KEY`，将密码文件内容复制到 `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`。不要把私钥或密码文件复制到仓库目录，也不要提交到 Git。
+
 推荐一键脚本（会执行 `universal.dmg` 构建、上传 GitHub Release 资产、更新 `Casks/gateway-tools.rb`）：
 
 ```bash
