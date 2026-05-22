@@ -7,6 +7,12 @@ All notable changes to Gateway-tools will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.24.6] - 2026-05-22
+
+### Fixed
+- **Release workflow updater signing preflight now accepts both supported secret shapes**: CI normalizes either the generated base64 key file content or decoded `untrusted comment...` key text before running a signing smoke test and handing the key file path to Tauri.
+
+---
 ## [0.24.5] - 2026-05-22
 
 ### Added

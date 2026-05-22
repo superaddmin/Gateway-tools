@@ -7,6 +7,12 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
 ---
+## [0.24.6] - 2026-05-22
+
+### 修复
+- **发布工作流的 updater 签名预检现兼容两种常见 secret 形态**：CI 会将生成的 base64 私钥文件内容，或已解码的 `untrusted comment...` 私钥文本统一规范化，再执行签名烟测并把私钥文件路径交给 Tauri。
+
+---
 ## [0.24.5] - 2026-05-22
 
 ### 新增
