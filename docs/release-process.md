@@ -42,7 +42,12 @@ GitHub Actions 发布工作流会构建 macOS、Windows 与 Linux 资产。macOS
 
 如果私钥缺失、格式错误或密码不匹配，Release workflow 会降级继续发布普通安装包，并跳过 updater `.sig` artifacts 与 `latest.json`。这种发布可以下载安装，但应用内自动更新不可用；修复 GitHub Secrets 后，下一次发布会自动恢复完整 updater 资产。
 
-当前 updater 公钥已在 `src-tauri/tauri.conf.json` 中轮换。匹配的新私钥生成在本机仓库外：
+当前 updater 公钥已在 `src-tauri/tauri.conf.json` 中轮换。为兼容已经安装旧版的用户，密钥轮换必须分两次发布：
+
+1. `v0.24.10` 作为过渡版本：应用内置新公钥，但 GitHub Actions secrets 仍使用旧公钥对应的旧私钥签名。这样旧客户端可以验证并更新到带新公钥的版本。
+2. `v0.24.11` 及之后：确认 `v0.24.10` 已发布并可自动更新后，再把 GitHub Actions secrets 切换为新私钥和新密码，用新密钥签名后续版本。
+
+匹配新公钥的新私钥生成在本机仓库外：
 
 ```text
 C:\Users\iphon\Gateway-tools-updater-keys\gateway-tools-updater-private-v0.24.10.key
@@ -54,7 +59,7 @@ C:\Users\iphon\Gateway-tools-updater-keys\gateway-tools-updater-private-v0.24.10
 C:\Users\iphon\Gateway-tools-updater-keys\gateway-tools-updater-private-v0.24.10.password.txt
 ```
 
-将私钥文件内容完整复制到 GitHub Actions secret `TAURI_SIGNING_PRIVATE_KEY`，将密码文件内容复制到 `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`。不要把私钥或密码文件复制到仓库目录，也不要提交到 Git。
+发布 `v0.24.10` 过渡版本时，不要把上面的新私钥写入 GitHub Actions secrets；保持 `TAURI_SIGNING_PRIVATE_KEY` / `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` 为旧密钥。发布 `v0.24.11` 及之后版本前，再将新私钥文件内容完整复制到 GitHub Actions secret `TAURI_SIGNING_PRIVATE_KEY`，将新密码文件内容复制到 `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`。不要把私钥或密码文件复制到仓库目录，也不要提交到 Git。
 
 推荐一键脚本（会执行 `universal.dmg` 构建、上传 GitHub Release 资产、更新 `Casks/gateway-tools.rb`）：
 

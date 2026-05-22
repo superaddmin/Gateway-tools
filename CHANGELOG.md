@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [0.24.10] - 2026-05-23
 
 ### Changed
-- **Rotated the Tauri updater public key**: `tauri.conf.json` now trusts the newly generated updater signing key pair. GitHub Actions must be configured with the matching private key before the next full updater release.
+- **Prepared Tauri updater key rotation**: `tauri.conf.json` now trusts the newly generated updater public key. Publish this version as a transition release signed with the old private key, then switch GitHub Actions to the new private key for the following release.
 
 ---
 ## [0.24.9] - 2026-05-22

@@ -10,7 +10,7 @@
 ## [0.24.10] - 2026-05-23
 
 ### 变更
-- **轮换 Tauri updater 公钥**：`tauri.conf.json` 现信任新生成的 updater 签名密钥对。下一次完整 updater 发布前，需要在 GitHub Actions 中配置匹配的私钥。
+- **准备 Tauri updater 密钥轮换**：`tauri.conf.json` 现信任新生成的 updater 公钥。本版本应作为过渡版本继续使用旧私钥签名发布，下一版再将 GitHub Actions 切换到新私钥。
 
 ---
 ## [0.24.9] - 2026-05-22
