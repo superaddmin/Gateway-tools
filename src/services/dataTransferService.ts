@@ -342,6 +342,9 @@ function firstLegacySample(value: unknown): Record<string, unknown> | null {
   if (Array.isArray(value)) {
     return value.find((item) => isRecord(item)) ?? null;
   }
+  if (isRecord(value) && Array.isArray(value.accounts)) {
+    return value.accounts.find((item) => isRecord(item)) ?? null;
+  }
   return isRecord(value) ? value : null;
 }
 
@@ -356,6 +359,20 @@ function isAccountTransferBundleLike(value: unknown): boolean {
   return isRecord(value) && (
     value.schema === ACCOUNT_TRANSFER_SCHEMA ||
     value.schema === 'cockpit-tools.account-transfer'
+  );
+}
+
+function looksLikeSub2apiCodexExport(value: unknown): boolean {
+  if (!isRecord(value) || !Array.isArray(value.accounts)) return false;
+  return Boolean(
+    'exported_at' in value ||
+      'proxies' in value ||
+      value.accounts.some(
+        (item) =>
+          isRecord(item) &&
+          isRecord(item.credentials) &&
+          normalizeString(item.platform)?.toLowerCase() === 'openai',
+      ),
   );
 }
 
@@ -1085,6 +1102,10 @@ function synthesizeAccountImportResult(
 }
 
 function detectLegacyPlatform(value: unknown): PlatformId | null {
+  if (looksLikeSub2apiCodexExport(value)) {
+    return 'codex';
+  }
+
   const sample = firstLegacySample(value);
   if (!sample) return null;
 

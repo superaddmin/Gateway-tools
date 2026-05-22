@@ -7,6 +7,15 @@ All notable changes to Gateway-tools will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.24.5] - 2026-05-22
+
+### Added
+- **Codex JSON import now accepts Sub2API-style OpenAI OAuth exports**: files with top-level `accounts` and nested `credentials` can be imported directly without manually converting them.
+
+### Fixed
+- **Release workflow now validates and normalizes the Tauri updater signing key before packaging**: CI catches decoded or malformed key secrets early and passes a temporary key file path to Tauri, avoiding updater artifact failures during release builds.
+
+---
 ## [0.24.4] - 2026-05-22
 
 ### Changed

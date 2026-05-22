@@ -1,7 +1,7 @@
 {
   "name": "gateway-tools",
   "private": true,
-  "version": "0.24.4",
+  "version": "0.24.5",
   "type": "module",
   "author": "superaddmin",
   "repository": {

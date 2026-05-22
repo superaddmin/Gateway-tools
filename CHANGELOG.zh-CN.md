@@ -7,6 +7,15 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
 ---
+## [0.24.5] - 2026-05-22
+
+### 新增
+- **Codex JSON 导入现支持 Sub2API 风格 OpenAI OAuth 导出**：顶层包含 `accounts`、凭据位于 `credentials` 内的文件可直接导入，无需手动转换格式。
+
+### 修复
+- **发布工作流现会在打包前校验并规范化 Tauri updater 签名私钥**：CI 会提前拦截已解码或格式异常的 key secret，并将临时私钥文件路径传给 Tauri，避免 release 构建阶段生成 updater artifacts 失败。
+
+---
 ## [0.24.4] - 2026-05-22
 
 ### 变更
