@@ -1,6 +1,6 @@
 cask "gateway-tools" do
-  version "0.24.8"
-  sha256 "03ea375828a9a213793c03f1b415bc28513dceee6c3d21d6e5bfe8ec185d9661"
+  version "0.24.9"
+  sha256 "1cb96784b3a27236e0193448eaa53ccfd248d867cc79af5c43b79541641b09af"
 
   url "https://github.com/superaddmin/Gateway-tools/releases/download/v#{version}/Gateway-tools_#{version}_universal.dmg",
       verified: "github.com/superaddmin/Gateway-tools/"
