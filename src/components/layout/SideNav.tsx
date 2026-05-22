@@ -68,6 +68,7 @@ const PAGE_PLATFORM_MAP: Partial<Record<Page, PlatformId>> = {
 const CLASSIC_NAV_MIN_SCALE = 0.5;
 const CLASSIC_NAV_SCALE_EPSILON = 0.004;
 const CLASSIC_NAV_SCROLL_EPSILON = 4;
+const COMPACT_NAV_MEDIA_QUERY = '(max-width: 900px)';
 
 function renderEntryIcon(entry: SideNavEntry, size: number) {
   if (entry.group && entry.group.iconKind === 'custom' && entry.group.iconCustomDataUrl) {
@@ -120,7 +121,14 @@ export function SideNav({
   const toggleClassicCollapsed = useSideNavLayoutStore((state) => state.toggleClassicCollapsed);
   const hideClassicSwitchPrompt = useSideNavLayoutStore((state) => state.hideClassicSwitchPrompt);
   const setHideClassicSwitchPrompt = useSideNavLayoutStore((state) => state.setHideClassicSwitchPrompt);
-  const isClassicLayout = sideNavLayoutMode === 'classic';
+  const [isCompactNavViewport, setIsCompactNavViewport] = useState(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) {
+      return false;
+    }
+
+    return window.matchMedia(COMPACT_NAV_MEDIA_QUERY).matches;
+  });
+  const isClassicLayout = sideNavLayoutMode === 'classic' && !isCompactNavViewport;
   const isClassicCollapsed = isClassicLayout && classicCollapsed;
   const showClassicLabels = isClassicLayout && !classicCollapsed;
   const rocketIdRef = useRef(0);
@@ -280,6 +288,24 @@ export function SideNav({
       || updateActionState === 'installing'
       || updateActionState === 'ready'
     );
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia(COMPACT_NAV_MEDIA_QUERY);
+    const syncCompactNavViewport = () => {
+      setIsCompactNavViewport(mediaQuery.matches);
+    };
+
+    syncCompactNavViewport();
+    mediaQuery.addEventListener('change', syncCompactNavViewport);
+
+    return () => {
+      mediaQuery.removeEventListener('change', syncCompactNavViewport);
+    };
+  }, []);
 
   const recalculateClassicAdaptiveScale = useCallback(() => {
     if (!isClassicLayout || typeof window === 'undefined') {
@@ -740,7 +766,7 @@ export function SideNav({
       <nav
         ref={sideNavRef}
         style={classicScaleStyle}
-        className={`side-nav${isClassicLayout ? ' side-nav-classic' : ''}${isClassicCollapsed ? ' side-nav-classic-collapsed' : ''}`}
+        className={`side-nav${isCompactNavViewport ? ' side-nav-compact' : ''}${isClassicLayout ? ' side-nav-classic' : ''}${isClassicCollapsed ? ' side-nav-classic-collapsed' : ''}`}
       >
       {shouldShowUpdateEntry && (
         <div className="side-nav-update-entry" ref={updateEntryRef}>

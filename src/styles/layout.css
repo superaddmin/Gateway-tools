@@ -933,6 +933,7 @@ html[data-theme="dark"] .side-nav-classic-handle:hover {
     top: auto;
     bottom: 12px;
     transform: none;
+    animation: none;
     width: auto;
     min-height: 0;
     height: 58px;
@@ -1012,15 +1013,81 @@ html[data-theme="dark"] .side-nav-classic-handle:hover {
   }
 
   .side-nav.side-nav-classic {
-    width: 72px;
-    min-height: 100vh;
-    height: 100vh;
-    bottom: auto;
-    inset-inline-end: auto;
-    border-radius: 0;
+    width: auto;
+    min-height: 0;
+    height: 58px;
+    min-width: 0;
+    inset-inline-start: 12px;
+    inset-inline-end: 12px;
+    top: auto;
+    bottom: 12px;
+    transform: none;
+    animation: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 10px;
+    gap: 10px;
+    border-radius: 16px;
   }
 
   .side-nav.side-nav-classic .nav-brand {
-    display: flex;
+    display: none;
+  }
+
+  .side-nav.side-nav-classic .nav-items {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 0 1px;
+    scrollbar-width: none;
+  }
+
+  .side-nav.side-nav-classic .nav-items::-webkit-scrollbar {
+    display: none;
+  }
+
+  .side-nav.side-nav-classic .nav-item,
+  .side-nav.side-nav-classic.side-nav-classic-collapsed .nav-item {
+    width: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    border-radius: var(--side-nav-item-radius);
+  }
+
+  .side-nav.side-nav-classic .nav-item-text,
+  .side-nav.side-nav-classic .nav-sub-list,
+  .side-nav.side-nav-classic .nav-group-chevron {
+    display: none;
+  }
+
+  .side-nav.side-nav-classic .nav-bottom-actions,
+  .side-nav.side-nav-classic.side-nav-classic-collapsed .nav-bottom-actions {
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    margin-top: 0;
+    border-top: 0;
+  }
+
+  .side-nav-classic-handle {
+    display: none;
+  }
+
+  .app-container-side-nav-classic .main-wrapper,
+  .app-container-side-nav-classic-collapsed .main-wrapper {
+    margin-inline-start: 0;
   }
 }
