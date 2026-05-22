@@ -7,6 +7,12 @@ All notable changes to Gateway-tools will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.24.8] - 2026-05-22
+
+### Fixed
+- **Release workflow no longer blocks installer publication when updater signing secrets are missing or invalid**: CI now disables updater artifacts for that run, publishes installer assets, skips merged `latest.json`, and keeps checksum/latest-release publishing alive. Valid signing secrets still produce full updater `.sig` artifacts.
+
+---
 ## [0.24.7] - 2026-05-22
 
 ### Fixed

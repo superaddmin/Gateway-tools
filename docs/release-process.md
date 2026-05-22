@@ -40,6 +40,8 @@ GitHub Actions 发布工作流会构建 macOS、Windows 与 Linux 资产。macOS
 
 工作流会先把私钥规范化并写入 runner 临时文件，执行一次 `tauri signer sign` 烟测，再交给 Tauri 生成 `.sig` updater artifacts 和最终 `latest.json`。
 
+如果私钥缺失、格式错误或密码不匹配，Release workflow 会降级继续发布普通安装包，并跳过 updater `.sig` artifacts 与 `latest.json`。这种发布可以下载安装，但应用内自动更新不可用；修复 GitHub Secrets 后，下一次发布会自动恢复完整 updater 资产。
+
 推荐一键脚本（会执行 `universal.dmg` 构建、上传 GitHub Release 资产、更新 `Casks/gateway-tools.rb`）：
 
 ```bash

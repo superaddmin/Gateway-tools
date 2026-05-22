@@ -7,6 +7,12 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
 ---
+## [0.24.8] - 2026-05-22
+
+### 修复
+- **发布工作流不再因 updater 签名 secrets 缺失或无效而阻塞安装包发布**：CI 会在本次运行中关闭 updater artifacts，继续发布安装包资产，跳过合并 `latest.json`，并保持校验和与 latest release 发布流程可用。签名 secrets 有效时仍会生成完整 updater `.sig` artifacts。
+
+---
 ## [0.24.7] - 2026-05-22
 
 ### 修复

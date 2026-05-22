@@ -9,6 +9,8 @@ jobs:
   release:
     permissions:
       contents: write
+    outputs:
+      updater_signing_enabled: ${{ steps.updater_signing_key.outputs.enabled }}
     strategy:
       fail-fast: false
       matrix:
@@ -153,56 +155,24 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD || secrets.TAURI_PRIVATE_KEY_PASSWORD || secrets.TAURI_KEY_PASSWORD }}
         run: |
           set -euo pipefail
+          node scripts/release/prepare_updater_signing_key.cjs \
+            "$RUNNER_TEMP/tauri-updater-signing.key" \
+            "$RUNNER_TEMP/tauri-updater-signing-smoke.txt"
 
-          if [ -z "${TAURI_SIGNING_PRIVATE_KEY:-}" ]; then
-            echo "TAURI_SIGNING_PRIVATE_KEY or legacy TAURI_PRIVATE_KEY is required because bundle.createUpdaterArtifacts is enabled."
-            exit 1
-          fi
-
-          key_file="$RUNNER_TEMP/tauri-updater-signing.key"
-          node - "$key_file" <<'NODE'
+      - name: Disable updater artifacts when signing is unavailable
+        if: steps.updater_signing_key.outputs.enabled != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
           const fs = require('fs');
-          const outputPath = process.argv[2];
-          const raw = (process.env.TAURI_SIGNING_PRIVATE_KEY || '').trim();
-
-          if (!raw) {
-            console.error('TAURI_SIGNING_PRIVATE_KEY is empty.');
-            process.exit(1);
-          }
-
-          const decode = (value) => Buffer.from(value, 'base64').toString('utf8');
-          let normalized = raw;
-          let decoded = '';
-
-          try {
-            decoded = decode(raw);
-          } catch {
-            decoded = '';
-          }
-
-          if (!decoded.startsWith('untrusted comment:')) {
-            if (raw.startsWith('untrusted comment:')) {
-              decoded = raw;
-              normalized = Buffer.from(raw, 'utf8').toString('base64');
-            } else {
-              console.error(
-                'TAURI_SIGNING_PRIVATE_KEY must be either the generated base64 key file content or the decoded key text starting with "untrusted comment:".',
-              );
-              process.exit(1);
-            }
-          }
-
-          fs.writeFileSync(outputPath, normalized);
+          const file = 'src-tauri/tauri.conf.json';
+          const config = JSON.parse(fs.readFileSync(file, 'utf8'));
+          config.bundle = config.bundle || {};
+          config.bundle.createUpdaterArtifacts = false;
+          fs.writeFileSync(file, `${JSON.stringify(config, null, 2)}\n`);
+          console.log('Disabled bundle.createUpdaterArtifacts for this release run.');
           NODE
-
-          smoke_file="$RUNNER_TEMP/tauri-updater-signing-smoke.txt"
-          printf 'tauri updater signing smoke test' > "$smoke_file"
-          npx tauri signer sign \
-            --private-key-path "$key_file" \
-            --password "${TAURI_SIGNING_PRIVATE_KEY_PASSWORD:-}" \
-            "$smoke_file" >/dev/null
-
-          echo "key_path=$key_file" >> "$GITHUB_OUTPUT"
 
       - name: Build the app
         uses: tauri-apps/tauri-action@v0
@@ -222,7 +192,7 @@ jobs:
     name: Rebuild merged latest.json
     needs: release
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') && needs.release.outputs.updater_signing_enabled == 'true'
     permissions:
       contents: write
     env:
@@ -322,7 +292,7 @@ jobs:
       - release
       - rebuild-latest-json
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: always() && startsWith(github.ref, 'refs/tags/v') && needs.release.result == 'success' && needs.rebuild-latest-json.result != 'failure' && !cancelled()
     permissions:
       contents: write
     env:
@@ -388,8 +358,9 @@ jobs:
       - release
       - rebuild-latest-json
       - upload-checksums
+      - publish-release
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: always() && startsWith(github.ref, 'refs/tags/v') && needs.release.result == 'success' && needs.rebuild-latest-json.result != 'failure' && needs.upload-checksums.result == 'success' && needs.publish-release.result == 'success' && !cancelled()
     permissions:
       contents: write
       pull-requests: write
@@ -480,8 +451,9 @@ jobs:
     needs:
       - release
       - rebuild-latest-json
+      - upload-checksums
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: always() && startsWith(github.ref, 'refs/tags/v') && needs.release.result == 'success' && needs.rebuild-latest-json.result != 'failure' && needs.upload-checksums.result == 'success' && !cancelled()
     permissions:
       contents: write
     steps:

@@ -105,11 +105,38 @@ jobs:
       - name: Sync versions
         run: npm run sync-version
 
+      - name: Prepare updater signing key file
+        id: updater_signing_key
+        shell: bash
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY || secrets.TAURI_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD || secrets.TAURI_PRIVATE_KEY_PASSWORD || secrets.TAURI_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          node scripts/release/prepare_updater_signing_key.cjs \
+            "$RUNNER_TEMP/tauri-updater-signing.key" \
+            "$RUNNER_TEMP/tauri-updater-signing-smoke.txt"
+
+      - name: Disable updater artifacts when signing is unavailable
+        if: steps.updater_signing_key.outputs.enabled != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require('fs');
+          const file = 'src-tauri/tauri.conf.json';
+          const config = JSON.parse(fs.readFileSync(file, 'utf8'));
+          config.bundle = config.bundle || {};
+          config.bundle.createUpdaterArtifacts = false;
+          fs.writeFileSync(file, `${JSON.stringify(config, null, 2)}\n`);
+          console.log('Disabled bundle.createUpdaterArtifacts for this build run.');
+          NODE
+
       - name: Build app
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY || secrets.TAURI_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ steps.updater_signing_key.outputs.key_path }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD || secrets.TAURI_PRIVATE_KEY_PASSWORD || secrets.TAURI_KEY_PASSWORD }}
         run: |
           set -euo pipefail
