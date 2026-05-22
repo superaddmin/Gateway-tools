@@ -94,7 +94,8 @@ const PLATFORM_ADAPTERS: Record<PlatformId, TransferAdapter> = {
   },
 };
 
-export const ACCOUNT_TRANSFER_SCHEMA = 'cockpit-tools.account-transfer';
+export const ACCOUNT_TRANSFER_SCHEMA = 'gateway-tools.account-transfer';
+const LEGACY_ACCOUNT_TRANSFER_SCHEMA = 'cockpit-tools.account-transfer';
 export const ACCOUNT_TRANSFER_VERSION = 1;
 
 export interface AccountTransferPlatformPayload {
@@ -290,7 +291,7 @@ function parseAccountTransferBundle(jsonContent: string): Record<PlatformId, Acc
     throw new Error('invalid_bundle_root');
   }
 
-  if (parsed.schema !== ACCOUNT_TRANSFER_SCHEMA) {
+  if (parsed.schema !== ACCOUNT_TRANSFER_SCHEMA && parsed.schema !== LEGACY_ACCOUNT_TRANSFER_SCHEMA) {
     throw new Error('invalid_bundle_schema');
   }
 

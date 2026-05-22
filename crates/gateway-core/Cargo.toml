@@ -1,8 +1,8 @@
 [package]
-name = "cockpit-core"
+name = "gateway-core"
 version = "0.1.0"
 edition = "2021"
-authors = ["jlcodes"]
+authors = ["superaddmin"]
 license = "CC-BY-NC-SA-4.0"
 
 [dependencies]

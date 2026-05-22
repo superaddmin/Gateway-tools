@@ -1,12 +1,12 @@
 [package]
-name = "cockpit-cli"
+name = "gateway-cli"
 version = "0.1.0"
 edition = "2021"
-authors = ["jlcodes"]
+authors = ["superaddmin"]
 license = "CC-BY-NC-SA-4.0"
 
 [dependencies]
-cockpit-core = { path = "../cockpit-core" }
+gateway-core = { path = "../gateway-core" }
 clap = { version = "4.5", features = ["derive", "env"] }
 serde.workspace = true
 serde_json.workspace = true

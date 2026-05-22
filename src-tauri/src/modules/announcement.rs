@@ -8,7 +8,7 @@ use super::config;
 use super::logger;
 
 const ANNOUNCEMENT_URL: &str =
-    "https://raw.githubusercontent.com/jlcodes99/cockpit-tools/main/announcements.json";
+    "https://raw.githubusercontent.com/superaddmin/Gateway-tools/main/announcements.json";
 const ANNOUNCEMENT_CACHE_FILE: &str = "announcement_cache.json";
 const ANNOUNCEMENT_READ_IDS_FILE: &str = "announcement_read_ids.json";
 const ANNOUNCEMENT_LOCAL_OVERRIDE_FILE: &str = "announcements.local.json";
@@ -533,7 +533,7 @@ async fn fetch_remote_announcements() -> Result<AnnouncementResponse, String> {
     logger::log_info("[Announcement] 从远端拉取公告");
 
     let client = reqwest::Client::builder()
-        .user_agent("Cockpit-Tools")
+        .user_agent("Gateway-tools")
         .timeout(std::time::Duration::from_secs(10))
         .build()
         .map_err(|e| format!("创建公告 HTTP 客户端失败: {}", e))?;

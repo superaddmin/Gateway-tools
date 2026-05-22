@@ -1,11 +1,11 @@
-# Cockpit Tools
+# Gateway-tools
 
 [English](README.en.md) · [Portuguese (BR)](README.pt-br.md) · 简体中文
 
-[![GitHub stars](https://img.shields.io/github/stars/jlcodes99/cockpit-tools?style=flat&color=gold)](https://github.com/jlcodes99/cockpit-tools)
-[![GitHub downloads](https://img.shields.io/github/downloads/jlcodes99/cockpit-tools/total?style=flat&color=blue)](https://github.com/jlcodes99/cockpit-tools/releases)
-[![GitHub release](https://img.shields.io/github/v/release/jlcodes99/cockpit-tools?style=flat)](https://github.com/jlcodes99/cockpit-tools/releases)
-[![GitHub issues](https://img.shields.io/github/issues/jlcodes99/cockpit-tools)](https://github.com/jlcodes99/cockpit-tools/issues)
+[![GitHub stars](https://img.shields.io/github/stars/superaddmin/Gateway-tools?style=flat&color=gold)](https://github.com/superaddmin/Gateway-tools)
+[![GitHub downloads](https://img.shields.io/github/downloads/superaddmin/Gateway-tools/total?style=flat&color=blue)](https://github.com/superaddmin/Gateway-tools/releases)
+[![GitHub release](https://img.shields.io/github/v/release/superaddmin/Gateway-tools?style=flat)](https://github.com/superaddmin/Gateway-tools/releases)
+[![GitHub issues](https://img.shields.io/github/issues/superaddmin/Gateway-tools)](https://github.com/superaddmin/Gateway-tools/issues)
 
 一款**通用的 AI IDE 账号管理工具**，目前支持 **Antigravity IDE**、**Codex**、**GitHub Copilot**、**Windsurf**、**Kiro**、**Cursor**、**Gemini Cli**、**CodeBuddy**、**CodeBuddy CN**、**Qoder**、**Trae** 和 **Zed**，并支持多账号多实例并行运行。
 
@@ -229,10 +229,11 @@ Codex 同样支持多账号多实例并行运行。比如同时打开两个 Code
   - `~/.antigravity_cockpit`：Antigravity IDE 账号、配置、WebSocket 状态等
   - `~/.codex`：Codex 官方当前登录 `auth.json`
   - `~/.gemini`：Gemini Cli 本地会话文件（如 `oauth_creds.json`、`google_accounts.json`、`settings.json`）
-  - 系统本地应用数据目录下 `com.antigravity.cockpit-tools`：Codex / GitHub Copilot / Windsurf / Kiro / Cursor / Gemini Cli / CodeBuddy / CodeBuddy CN / Qoder / Trae / Zed 多账号索引等
+  - 系统本地应用数据目录下 `com.superaddmin.gateway-tools`：应用窗口、WebView 与更新器相关的本地状态
+  - `~/.antigravity_cockpit`：Codex / GitHub Copilot / Windsurf / Kiro / Cursor / Gemini Cli / CodeBuddy / CodeBuddy CN / Qoder / Trae / Zed 多账号索引等
 - **WebSocket 默认仅本机访问**：监听 `127.0.0.1`，默认端口 `19528`，可在设置中关闭或改端口。
 - **什么时候会联网**：OAuth 登录、Token 刷新、配额查询、版本更新检查等官方接口请求。
-- **macOS 隐私权限弹窗说明**：在 Cockpit Tools 中启动 Codex/agent 后，如果 agent 执行的 shell 命令访问桌面、文稿、下载、照片等受保护目录，macOS 可能会把权限请求显示为“Cockpit Tools 想要访问……”。这是因为这些命令是 Cockpit Tools 启动的子进程，系统会把权限归因到宿主应用；这不等同于 Cockpit Tools 主程序主动扫描这些目录。是否允许取决于你是否信任当前 agent 任务和它将要执行的命令；不确定时可以选择拒绝，或先把项目放在普通工作目录中运行。
+- **macOS 隐私权限弹窗说明**：在 Gateway-tools 中启动 Codex/agent 后，如果 agent 执行的 shell 命令访问桌面、文稿、下载、照片等受保护目录，macOS 可能会把权限请求显示为“Gateway-tools 想要访问……”。这是因为这些命令是 Gateway-tools 启动的子进程，系统会把权限归因到宿主应用；这不等同于 Gateway-tools 主程序主动扫描这些目录。是否允许取决于你是否信任当前 agent 任务和它将要执行的命令；不确定时可以选择拒绝，或先把项目放在普通工作目录中运行。
 - **实用安全建议**：
   1. 不使用插件联动时，可关闭 WebSocket 服务。
   2. 不要把用户目录直接打包分享；备份前注意脱敏 token 文件。
@@ -289,7 +290,7 @@ Codex 同样支持多账号多实例并行运行。比如同时打开两个 Code
 
 ### 选项 A: 手动下载 (推荐)
 
-前往 [GitHub Releases](https://github.com/jlcodes99/cockpit-tools/releases) 下载对应系统的安装包：
+前往 [GitHub Releases](https://github.com/superaddmin/Gateway-tools/releases) 下载对应系统的安装包：
 
 *   **macOS**: `.dmg` (Apple Silicon & Intel)
 *   **Windows**: `.msi` (推荐) 或 `.exe`
@@ -300,27 +301,27 @@ Codex 同样支持多账号多实例并行运行。比如同时打开两个 Code
 > 需要先安装 Homebrew。
 
 ```bash
-brew tap jlcodes99/cockpit-tools https://github.com/jlcodes99/cockpit-tools
-brew install --cask cockpit-tools
+brew tap superaddmin/Gateway-tools https://github.com/superaddmin/Gateway-tools
+brew install --cask gateway-tools
 ```
 
 如果遇到 macOS “应用已损坏”或无法打开，也可以使用 `--no-quarantine` 安装：
 
 ```bash
-brew install --cask --no-quarantine cockpit-tools
+brew install --cask --no-quarantine gateway-tools
 ```
 
-如果提示已存在应用（例如：`already an App at '/Applications/Cockpit Tools.app'`），请先删除旧版本再安装：
+如果提示已存在应用（例如：`already an App at '/Applications/Gateway-tools.app'`），请先删除旧版本再安装：
 
 ```bash
-rm -rf "/Applications/Cockpit Tools.app"
-brew install --cask cockpit-tools
+rm -rf "/Applications/Gateway-tools.app"
+brew install --cask gateway-tools
 ```
 
 或者直接强制覆盖安装：
 
 ```bash
-brew install --cask --force cockpit-tools
+brew install --cask --force gateway-tools
 ```
 
 ### 🛠️ 常见问题排查 (Troubleshooting)
@@ -331,7 +332,7 @@ brew install --cask --force cockpit-tools
 1.  **命令行修复** (推荐):
     打开终端，执行以下命令：
     ```bash
-    sudo xattr -rd com.apple.quarantine "/Applications/Cockpit Tools.app"
+    sudo xattr -rd com.apple.quarantine "/Applications/Gateway-tools.app"
     ```
     > **注意**: 如果您修改了应用名称，请在命令中相应调整路径。
 
@@ -369,7 +370,7 @@ npm run tauri build
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=jlcodes99/cockpit-tools&type=Date)](https://star-history.com/#jlcodes99/cockpit-tools&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=superaddmin/Gateway-tools&type=Date)](https://star-history.com/#superaddmin/Gateway-tools&Date)
 
 ---
 

@@ -1,15 +1,25 @@
 use rusqlite::Connection;
 use std::path::PathBuf;
 
-fn webkit_data_root() -> Option<PathBuf> {
+fn webkit_data_roots() -> Vec<PathBuf> {
     #[cfg(target_os = "macos")]
     {
-        let home = dirs::home_dir()?;
-        Some(home.join("Library/WebKit/com.jlcodes.cockpit-tools/WebsiteData"))
+        let Some(home) = dirs::home_dir() else {
+            return Vec::new();
+        };
+        ["com.superaddmin.gateway-tools", "com.jlcodes.cockpit-tools"]
+            .into_iter()
+            .map(|identifier| {
+                home.join("Library")
+                    .join("WebKit")
+                    .join(identifier)
+                    .join("WebsiteData")
+            })
+            .collect()
     }
     #[cfg(not(target_os = "macos"))]
     {
-        None
+        Vec::new()
     }
 }
 
@@ -41,43 +51,42 @@ fn find_localstorage_dbs(root: &std::path::Path) -> Vec<PathBuf> {
 ///
 /// Running this at startup keeps the WAL from accumulating over time.
 pub fn checkpoint_webkit_localstorage() {
-    let Some(root) = webkit_data_root() else {
-        return;
-    };
-    if !root.exists() {
-        return;
-    }
+    for root in webkit_data_roots() {
+        if !root.exists() {
+            continue;
+        }
 
-    let dbs = find_localstorage_dbs(&root);
-    if dbs.is_empty() {
-        return;
-    }
+        let dbs = find_localstorage_dbs(&root);
+        if dbs.is_empty() {
+            continue;
+        }
 
-    for db_path in dbs {
-        let label = db_path.display();
-        match Connection::open(&db_path) {
-            Ok(conn) => {
-                match conn.execute_batch("PRAGMA wal_checkpoint(TRUNCATE);") {
-                    Ok(()) => {
-                        crate::modules::logger::log_info(&format!(
-                            "[WebkitCache] WAL checkpoint 成功: {}",
-                            label
-                        ));
+        for db_path in dbs {
+            let label = db_path.display();
+            match Connection::open(&db_path) {
+                Ok(conn) => {
+                    match conn.execute_batch("PRAGMA wal_checkpoint(TRUNCATE);") {
+                        Ok(()) => {
+                            crate::modules::logger::log_info(&format!(
+                                "[WebkitCache] WAL checkpoint 成功: {}",
+                                label
+                            ));
+                        }
+                        Err(e) => {
+                            crate::modules::logger::log_warn(&format!(
+                                "[WebkitCache] WAL checkpoint 失败 (可能 WebView 正在占用): {} — {}",
+                                label, e
+                            ));
+                        }
                     }
-                    Err(e) => {
-                        crate::modules::logger::log_warn(&format!(
-                            "[WebkitCache] WAL checkpoint 失败 (可能 WebView 正在占用): {} — {}",
-                            label, e
-                        ));
-                    }
+                    drop(conn);
                 }
-                drop(conn);
-            }
-            Err(e) => {
-                crate::modules::logger::log_warn(&format!(
-                    "[WebkitCache] 无法打开数据库: {} — {}",
-                    label, e
-                ));
+                Err(e) => {
+                    crate::modules::logger::log_warn(&format!(
+                        "[WebkitCache] 无法打开数据库: {} — {}",
+                        label, e
+                    ));
+                }
             }
         }
     }

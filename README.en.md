@@ -1,11 +1,11 @@
-# Cockpit Tools
+# Gateway-tools
 
 English · [Portuguese (BR)](README.pt-br.md) · [简体中文](README.md)
 
-[![GitHub stars](https://img.shields.io/github/stars/jlcodes99/cockpit-tools?style=flat&color=gold)](https://github.com/jlcodes99/cockpit-tools)
-[![GitHub downloads](https://img.shields.io/github/downloads/jlcodes99/cockpit-tools/total?style=flat&color=blue)](https://github.com/jlcodes99/cockpit-tools/releases)
-[![GitHub release](https://img.shields.io/github/v/release/jlcodes99/cockpit-tools?style=flat)](https://github.com/jlcodes99/cockpit-tools/releases)
-[![GitHub issues](https://img.shields.io/github/issues/jlcodes99/cockpit-tools)](https://github.com/jlcodes99/cockpit-tools/issues)
+[![GitHub stars](https://img.shields.io/github/stars/superaddmin/Gateway-tools?style=flat&color=gold)](https://github.com/superaddmin/Gateway-tools)
+[![GitHub downloads](https://img.shields.io/github/downloads/superaddmin/Gateway-tools/total?style=flat&color=blue)](https://github.com/superaddmin/Gateway-tools/releases)
+[![GitHub release](https://img.shields.io/github/v/release/superaddmin/Gateway-tools?style=flat)](https://github.com/superaddmin/Gateway-tools/releases)
+[![GitHub issues](https://img.shields.io/github/issues/superaddmin/Gateway-tools)](https://github.com/superaddmin/Gateway-tools/issues)
 
 A **universal AI IDE account management tool**, currently supporting **Antigravity IDE**, **Codex**, **GitHub Copilot**, **Windsurf**, **Kiro**, **Cursor**, **Gemini Cli**, **CodeBuddy**, **CodeBuddy CN**, **Qoder**, **Trae**, and **Zed**, with multi-instance parallel workflows.
 
@@ -228,10 +228,11 @@ These are the most common security questions answered directly:
   - `~/.antigravity_cockpit`: Antigravity IDE accounts, configs, WebSocket status, etc.
   - `~/.codex`: official Codex current login `auth.json`
   - `~/.gemini`: Gemini Cli local session files (for example `oauth_creds.json`, `google_accounts.json`, `settings.json`)
-  - local app data folder under `com.antigravity.cockpit-tools`: Codex / GitHub Copilot / Windsurf / Kiro / Cursor / Gemini Cli / CodeBuddy / CodeBuddy CN / Qoder / Trae / Zed multi-account index data, etc.
+  - local app data folder under `com.superaddmin.gateway-tools`: local app, WebView, and updater state
+  - `~/.antigravity_cockpit`: Codex / GitHub Copilot / Windsurf / Kiro / Cursor / Gemini Cli / CodeBuddy / CodeBuddy CN / Qoder / Trae / Zed multi-account index data, etc.
 - **WebSocket is local-only by default**: binds to `127.0.0.1`, default port `19528`; you can disable it or change the port in Settings.
 - **When network access happens**: OAuth login, token refresh, quota fetching, update checks, and other official API requests.
-- **macOS privacy permission prompts**: after you start Codex/agent from Cockpit Tools, if an agent-run shell command accesses protected folders such as Desktop, Documents, Downloads, or Photos, macOS may show the request as "Cockpit Tools would like to access...". This happens because those commands are child processes launched by Cockpit Tools, so macOS attributes the request to the host app; it does not by itself mean the Cockpit Tools main process is actively scanning those folders. Grant access only when you trust the current agent task and the commands it is going to run. If unsure, deny the prompt or run the project from a normal working directory first.
+- **macOS privacy permission prompts**: after you start Codex/agent from Gateway-tools, if an agent-run shell command accesses protected folders such as Desktop, Documents, Downloads, or Photos, macOS may show the request as "Gateway-tools would like to access...". This happens because those commands are child processes launched by Gateway-tools, so macOS attributes the request to the host app; it does not by itself mean the Gateway-tools main process is actively scanning those folders. Grant access only when you trust the current agent task and the commands it is going to run. If unsure, deny the prompt or run the project from a normal working directory first.
 - **Practical safety tips**:
   1. If you do not need plugin integration, disable WebSocket.
   2. Do not share your full user directory directly; redact token files before backup/share.
@@ -292,7 +293,7 @@ Notes:
 
 ### Option A: Manual Download (Recommended)
 
-Go to [GitHub Releases](https://github.com/jlcodes99/cockpit-tools/releases) to download the package for your system:
+Go to [GitHub Releases](https://github.com/superaddmin/Gateway-tools/releases) to download the package for your system:
 
 *   **macOS**: `.dmg` (Apple Silicon & Intel)
 *   **Windows**: `.msi` (Recommended) or `.exe`
@@ -303,27 +304,27 @@ Go to [GitHub Releases](https://github.com/jlcodes99/cockpit-tools/releases) to 
 > Homebrew is required.
 
 ```bash
-brew tap jlcodes99/cockpit-tools https://github.com/jlcodes99/cockpit-tools
-brew install --cask cockpit-tools
+brew tap superaddmin/Gateway-tools https://github.com/superaddmin/Gateway-tools
+brew install --cask gateway-tools
 ```
 
 If you hit the macOS "App is damaged" warning, you can also install with `--no-quarantine`:
 
 ```bash
-brew install --cask --no-quarantine cockpit-tools
+brew install --cask --no-quarantine gateway-tools
 ```
 
-If Homebrew says the app already exists (e.g. `already an App at '/Applications/Cockpit Tools.app'`), remove the old app and install again:
+If Homebrew says the app already exists (e.g. `already an App at '/Applications/Gateway-tools.app'`), remove the old app and install again:
 
 ```bash
-rm -rf "/Applications/Cockpit Tools.app"
-brew install --cask cockpit-tools
+rm -rf "/Applications/Gateway-tools.app"
+brew install --cask gateway-tools
 ```
 
 Or force overwrite the existing app:
 
 ```bash
-brew install --cask --force cockpit-tools
+brew install --cask --force gateway-tools
 ```
 
 ### 🛠️ Troubleshooting
@@ -334,7 +335,7 @@ Due to macOS security mechanisms, apps not downloaded from the App Store may tri
 1.  **Command Line Fix** (Recommended):
     Open Terminal and run the following command:
     ```bash
-    sudo xattr -rd com.apple.quarantine "/Applications/Cockpit Tools.app"
+    sudo xattr -rd com.apple.quarantine "/Applications/Gateway-tools.app"
     ```
     > **Note**: If you changed the app name, please adjust the path in the command accordingly.
 
@@ -372,7 +373,7 @@ npm run tauri build
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=jlcodes99/cockpit-tools&type=Date)](https://star-history.com/#jlcodes99/cockpit-tools&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=superaddmin/Gateway-tools&type=Date)](https://star-history.com/#superaddmin/Gateway-tools&Date)
 
 ---
 

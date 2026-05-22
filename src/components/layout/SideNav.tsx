@@ -799,7 +799,7 @@ export function SideNav({
           </div>
 
           {isClassicLayout && !isClassicCollapsed && (
-            <div className="side-nav-brand-title">Cockpit Tools</div>
+            <div className="side-nav-brand-title">Gateway-tools</div>
           )}
         </div>
 

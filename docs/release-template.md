@@ -4,7 +4,7 @@
 
 ### 标题
 
-`Cockpit Tools vX.Y.Z`
+`Gateway-tools vX.Y.Z`
 
 ### 更新摘要
 
@@ -16,7 +16,7 @@
 
 - Windows:
 - macOS:
-- Linux/Ubuntu: 不再提供官方安装包
+- Linux/Ubuntu:
 
 ### 文件校验（SHA256）
 
@@ -38,7 +38,7 @@
 
 ### Title
 
-`Cockpit Tools vX.Y.Z`
+`Gateway-tools vX.Y.Z`
 
 ### Highlights
 
@@ -50,7 +50,7 @@
 
 - Windows:
 - macOS:
-- Linux/Ubuntu: no official installer is provided
+- Linux/Ubuntu:
 
 ### File Integrity (SHA256)
 

@@ -59,7 +59,8 @@ import * as traeService from './traeService';
 import * as workbuddyService from './workbuddyService';
 import type { InstanceLaunchMode } from '../types/instance';
 
-const DATA_TRANSFER_SCHEMA = 'cockpit-tools.data-transfer';
+const DATA_TRANSFER_SCHEMA = 'gateway-tools.data-transfer';
+const LEGACY_DATA_TRANSFER_SCHEMA = 'cockpit-tools.data-transfer';
 const DATA_TRANSFER_VERSION = 1;
 const WAKEUP_ENABLED_KEY = 'agtools.wakeup.enabled';
 const WAKEUP_TASKS_KEY = 'agtools.wakeup.tasks';
@@ -345,11 +346,17 @@ function firstLegacySample(value: unknown): Record<string, unknown> | null {
 }
 
 function isDataTransferBundle(value: unknown): value is DataTransferBundle {
-  return isRecord(value) && value.schema === DATA_TRANSFER_SCHEMA;
+  return isRecord(value) && (
+    value.schema === DATA_TRANSFER_SCHEMA ||
+    value.schema === LEGACY_DATA_TRANSFER_SCHEMA
+  );
 }
 
 function isAccountTransferBundleLike(value: unknown): boolean {
-  return isRecord(value) && value.schema === ACCOUNT_TRANSFER_SCHEMA;
+  return isRecord(value) && (
+    value.schema === ACCOUNT_TRANSFER_SCHEMA ||
+    value.schema === 'cockpit-tools.account-transfer'
+  );
 }
 
 function buildAccountRegistry(

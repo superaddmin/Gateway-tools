@@ -4,7 +4,7 @@ pub mod modules;
 pub mod utils;
 
 pub fn hello() {
-    println!("Hello from cockpit-core!");
+    println!("Hello from gateway-core!");
 }
 
 // Global AppHandle mock for library mode if needed, or better: decouple logic.

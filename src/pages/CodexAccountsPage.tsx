@@ -494,7 +494,7 @@ export function CodexAccountsPage() {
       : [],
   );
   const [exportFormat, setExportFormat] =
-    useState<CodexExportFormat>("cockpit_tools");
+    useState<CodexExportFormat>("gateway_tools");
   const [exportFileNameBase, setExportFileNameBase] =
     useState("codex_accounts");
   const [formattedExportJsonCopied, setFormattedExportJsonCopied] =
@@ -954,8 +954,8 @@ export function CodexAccountsPage() {
   const exportFormatOptions = useMemo<SingleSelectFilterOption[]>(
     () => [
       {
-        value: "cockpit_tools",
-        label: t("codex.exportFormat.cockpitTools", "Cockpit Tools"),
+        value: "gateway_tools",
+        label: t("codex.exportFormat.cockpitTools", "Gateway-tools"),
       },
       {
         value: "sub2api",
@@ -1030,7 +1030,7 @@ export function CodexAccountsPage() {
     if (!showExportModal) {
       return;
     }
-    setExportFormat("cockpit_tools");
+    setExportFormat("gateway_tools");
     setFormattedExportJsonCopied(false);
     setFormattedSavingExportJson(false);
     setFormattedExportSavedPath(null);
@@ -1075,7 +1075,7 @@ export function CodexAccountsPage() {
       console.error("[CodexExport] transform failed:", error);
       return buildCodexExportContent(
         exportJsonContent,
-        "cockpit_tools",
+        "gateway_tools",
         exportFileNameBase,
       );
     }
@@ -1112,7 +1112,7 @@ export function CodexAccountsPage() {
 
   const handleCloseExportModal = useCallback(() => {
     closeExportModal();
-    setExportFormat("cockpit_tools");
+    setExportFormat("gateway_tools");
     setFormattedExportJsonCopied(false);
     setFormattedSavingExportJson(false);
     setFormattedExportSavedPath(null);

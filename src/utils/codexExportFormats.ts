@@ -1,6 +1,6 @@
 import type { CodexAccount } from '../types/codex';
 
-export type CodexExportFormat = 'cockpit_tools' | 'sub2api' | 'cpa';
+export type CodexExportFormat = 'gateway_tools' | 'sub2api' | 'cpa';
 
 type JsonRecord = Record<string, unknown>;
 const INVALID_FILE_CHARS_REGEX = /[<>:"/\\|?*\x00-\x1F]/g;
@@ -297,7 +297,7 @@ export function transformCodexExportJson(
 ): string {
   const accounts = parseCockpitToolsCodexExport(rawJson);
 
-  if (format === 'cockpit_tools') {
+  if (format === 'gateway_tools') {
     return JSON.stringify(accounts.map(toCockpitToolsPortableStorage), null, 2);
   }
 
@@ -321,7 +321,7 @@ export function buildCodexExportFileNameBase(
   baseName: string,
   format: CodexExportFormat,
 ): string {
-  if (format === 'cockpit_tools') {
+  if (format === 'gateway_tools') {
     return baseName;
   }
   return `${baseName}_${format}`;

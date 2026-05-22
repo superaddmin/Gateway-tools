@@ -2,7 +2,7 @@
 
 简体中文 · [English](CHANGELOG.md)
 
-本文件记录 Cockpit Tools 的所有重要变更。
+本文件记录 Gateway-tools 的所有重要变更。
 
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
@@ -166,7 +166,7 @@
 - **macOS Dock 和菜单栏重新打开统一使用共享主窗口恢复链路**：重新打开时会通过同一套后端逻辑恢复、取消隐藏、激活并聚焦主窗口。
 
 ### 修复
-- **Windows 源码构建在旧调试程序仍运行时不再因替换 exe 失败中断**：Tauri dev/build 会在 Cargo 替换调试二进制前清理过期的 `target\debug\cockpit_tools.exe` 进程。
+- **Windows 源码构建在旧调试程序仍运行时不再因替换 exe 失败中断**：Tauri dev/build 会在 Cargo 替换调试二进制前清理过期的 `target\debug\gateway_tools.exe` 进程。
 
 ---
 ## [0.23.2] - 2026-05-12
@@ -241,7 +241,7 @@
 ### 变更
 - **Codex 账号导入后端现统一刷新 OAuth 额度信息**：从本地、JSON 或文件导入后会跳过 API Key 账号并刷新 OAuth 账号配额，再用刷新后的记录更新账号列表与托盘状态。
 - **Codex 导入包现支持更多便携 JSON 形态**：远端导入包与粘贴 JSON 导入可读取根数组、字符串包裹载荷、直接 Codex Token 对象，以及每行一个账号对象的 JSON Lines。
-- **Codex 便携导出格式现归一 Cockpit Tools JSON**：Cockpit Tools 导出会输出可移植的 Token/API Key JSON，CPA 文档会保留 Token 刷新时间与过期时间元数据。
+- **Codex 便携导出格式现归一 Gateway-tools JSON**：Gateway-tools 导出会输出可移植的 Token/API Key JSON，CPA 文档会保留 Token 刷新时间与过期时间元数据。
 - **Codex PRO 档位识别现与 CPA 20x 语义对齐**：未显式标记 `prolite` 的 `pro` 账号默认展示为 PRO Max/20x，并在本地 API 服务路由排序中按 20x 档位处理。
 - **Codex 会话可见性修复备份现按实例保留最近一次**：执行新一轮修复前会清理旧的会话可见性修复备份目录，避免备份长期堆积。
 
@@ -465,7 +465,7 @@
 ## [0.22.0] - 2026-04-18
 
 ### 新增
-- **已合入上游工作区/CLI 改造（PR #490，`dcdeda2`，基于 `ca5aade`）**：仓库已迁移为 Cargo Workspace，新增 `cockpit-core` 共享 Rust 逻辑层，并初始化 `cockpit-cli`（首版支持 Cursor / Gemini 账号列出与切换）。
+- **已合入上游工作区/CLI 改造（PR #490，`dcdeda2`，基于 `ca5aade`）**：仓库已迁移为 Cargo Workspace，新增 `gateway-core` 共享 Rust 逻辑层，并初始化 `gateway-cli`（首版支持 Cursor / Gemini 账号列出与切换）。
 - **Codex 账号页现已补齐本地 API 服务全量管理能力**：提供内联服务卡片与独立服务面板，可在同一流程完成集合成员维护、密钥显示/重置、服务端口设置、直接启动/测试，以及成员集合编辑。
 - **API 服务现已记录并展示总量与按账号统计**：服务面板可直接查看请求数、Token 使用（输入/输出/缓存/思考）、平均延迟与成功率。
 
@@ -482,7 +482,7 @@
 ## [0.21.4] - 2026-04-16
 
 ### 新增
-- **Codex 账号导出现已支持 Cockpit Tools、sub2api 和 CPA 三种格式**：导出弹框可在预览、复制和保存前切换目标格式，便于把 Codex 凭证直接迁移到对应工具。
+- **Codex 账号导出现已支持 Gateway-tools、sub2api 和 CPA 三种格式**：导出弹框可在预览、复制和保存前切换目标格式，便于把 Codex 凭证直接迁移到对应工具。
 - **实例页账号选择器现已支持按标签筛选**：绑定账号时可在下拉内先搜索、再按标签收窄账号范围，大账号池里不再需要只靠邮箱硬找。
 - **账号页现已支持键盘刷新快捷键**：`Cmd/Ctrl + R` 以及 Windows 下的 `F5` 会直接触发当前页面可见的刷新操作，无需再点工具栏按钮。
 
@@ -674,13 +674,13 @@
 ### 变更
 - **侧边栏布局配置现已支持按模式生效的管理行为**：设置页新增 `原始布局 / 经典布局` 切换；首次进入经典布局会按仪表盘可见项同步侧边栏入口；平台布局弹窗在经典布局下允许选择任意数量侧边栏入口，原始布局仍保持数量上限。
 - **Antigravity 账号额度展示分组现已固定为内置模型族（Claude / Gemini Pro / Gemini Flash）**：账号页展示分组改为直接使用预置分组，不再依赖手动分组配置。
-- **文档现已补充 Arch Linux 的 AUR 安装路径**：`README.md` 与 `README.en.md` 新增源码包（`cockpit-tools`）与预编译包（`cockpit-tools-bin`）两种安装方式说明。
+- **文档现已补充 Arch Linux 的 AUR 安装路径**：`README.md` 与 `README.en.md` 新增源码包（`gateway-tools`）与预编译包（`gateway-tools-bin`）两种安装方式说明。
 
 ---
 ## [0.20.8] - 2026-03-24
 
 ### 修复
-- **当用户没有在应用内显式开启全局代理时，macOS 下通过 shell 启动时继承的代理环境现已继续生效**：应用启动和保存配置时不再直接清空启动时继承的代理变量，而是恢复这份继承环境，因此 `export http_proxy=... && open -a 'Cockpit Tools'` 这类用法会继续可用；只有用户在应用内主动配置全局代理时才会覆盖它。
+- **当用户没有在应用内显式开启全局代理时，macOS 下通过 shell 启动时继承的代理环境现已继续生效**：应用启动和保存配置时不再直接清空启动时继承的代理变量，而是恢复这份继承环境，因此 `export http_proxy=... && open -a 'Gateway-tools'` 这类用法会继续可用；只有用户在应用内主动配置全局代理时才会覆盖它。
 
 ---
 ## [0.20.7] - 2026-03-24
@@ -1061,7 +1061,7 @@
 ## [0.12.3] - 2026-03-11
 
 ### 修复
-- **macOS 权限弹窗不再归因到 Cockpit Tools**：macOS 上所有 IDE 启动（Codex、VS Code、CodeBuddy）统一改为通过 `open -a`（LaunchServices）方式启动，不再直接执行二进制文件，使 macOS TCC 权限弹窗（如"访问下载文件夹"）正确归因到被启动的 IDE 而非 Cockpit Tools。多开实例的 PID 跟踪通过启动后进程轮询实现，不受影响。
+- **macOS 权限弹窗不再归因到 Gateway-tools**：macOS 上所有 IDE 启动（Codex、VS Code、CodeBuddy）统一改为通过 `open -a`（LaunchServices）方式启动，不再直接执行二进制文件，使 macOS TCC 权限弹窗（如"访问下载文件夹"）正确归因到被启动的 IDE 而非 Gateway-tools。多开实例的 PID 跟踪通过启动后进程轮询实现，不受影响。
 
 ---
 ## [0.12.2] - 2026-03-11
@@ -1456,17 +1456,17 @@
 ## [0.8.12] - 2026-02-22
 
 ### 新增
-- **GitHub Release + Homebrew Cask 一键发布脚本**：新增 `scripts/release/publish_github_release_and_cask.cjs` 与 `npm run release:github-and-cask`，支持 `universal.dmg` 构建、GitHub Release 上传与 `Casks/cockpit-tools.rb` 更新（含 `--skip-build` / `--skip-gh` / `--skip-cask` / `--dry-run` 等参数）。
+- **GitHub Release + Homebrew Cask 一键发布脚本**：新增 `scripts/release/publish_github_release_and_cask.cjs` 与 `npm run release:github-and-cask`，支持 `universal.dmg` 构建、GitHub Release 上传与 `Casks/gateway-tools.rb` 更新（含 `--skip-build` / `--skip-gh` / `--skip-cask` / `--dry-run` 等参数）。
 
 ### 变更
 - **启动路径探测策略优化**：应用启动时改为先读取本地配置，仅探测未配置路径的平台，并使用延迟 + 错峰执行，降低启动阶段集中调用系统探测命令的概率。
 - **发布流程文档补充 Homebrew 场景**：更新 `docs/release-process.md`，补充 `universal` 构建推荐方式、`SHA256SUMS` 生成示例、GitHub CLI/Rust target 前置条件及 cask 更新顺序说明。
-- **Release 工作流恢复 Homebrew Cask 自动更新**：`release.yml` 恢复 `update-homebrew-cask` 任务，基于已发布的 `*_universal.dmg` 自动计算 `sha256`、更新 `Casks/cockpit-tools.rb` 并创建 cask PR。
+- **Release 工作流恢复 Homebrew Cask 自动更新**：`release.yml` 恢复 `update-homebrew-cask` 任务，基于已发布的 `*_universal.dmg` 自动计算 `sha256`、更新 `Casks/gateway-tools.rb` 并创建 cask PR。
 - **仅自动合并 cask 自动生成 PR**：Release 工作流现仅对 `automation/update-cask-v*` 分支创建的 Homebrew cask PR 启用自动合并（squash + 删除分支），不影响其他普通 PR。
 
 ### 修复
 - **Windows 启动黑色命令行窗口闪烁**：修复 VS Code 路径注册表回退探测中 `cmd /c reg query` 未隐藏窗口的问题，后台命令改为隐藏执行，减少部分 Windows 用户启动时出现多个黑色窗口闪现。
-- **品牌名与套餐标签误翻译**：修复非英语语言中品牌名/产品名与原始套餐标签被本地化的问题，恢复 `Cockpit Tools`、`Antigravity`、`Codex`、`GitHub Copilot`、`Windsurf` 以及 `accounts.tier.*`、`codex.plan.*`、`kiro.plan.*` 的原始显示值。
+- **品牌名与套餐标签误翻译**：修复非英语语言中品牌名/产品名与原始套餐标签被本地化的问题，恢复 `Gateway-tools`、`Antigravity`、`Codex`、`GitHub Copilot`、`Windsurf` 以及 `accounts.tier.*`、`codex.plan.*`、`kiro.plan.*` 的原始显示值。
 - **翻译校验误报品牌名**：为多语言校验脚本补充品牌名英文复用白名单，避免后续再次将品牌名误判为“未本地化”。
 
 ---
@@ -1920,7 +1920,7 @@
   - 查看 5小时 (Hourly) 和周 (Weekly) 配额。
   - 自动识别账号订阅计划 (Basic, Plus, Team, Enterprise)。
   - 独立的账号列表和卡片视图。
-- **品牌重塑**: 项目正式更名为 **Cockpit Tools**。
+- **品牌重塑**: 项目正式更名为 **Gateway-tools**。
 - **赞助与反馈**: 在 设置 -> 关于 页面新增 "赞助支持" 和 "意见反馈" 入口，加强社区互动。
 
 ### 变更

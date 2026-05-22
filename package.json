@@ -1,5 +1,5 @@
 {
-  "name": "cockpit-tools",
+  "name": "gateway-tools",
   "private": true,
   "version": "0.24.3",
   "type": "module",
@@ -9,6 +9,8 @@
     "prebuild": "npm run typecheck",
     "build": "npm run sync-version && tsc && vite build",
     "release:preflight": "node scripts/release/preflight.cjs",
+    "release:github-and-cask": "node scripts/release/publish_github_release_and_cask.cjs",
+    "release:checksums": "node scripts/release/gen_checksums.cjs",
     "preview": "vite preview",
     "pretauri": "npm run typecheck",
     "tauri": "npm run sync-version && tauri",

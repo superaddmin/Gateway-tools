@@ -1,6 +1,6 @@
 # Release Process (Open Source, No Code Signing)
 
-> 适用于 Cockpit Tools 当前开源发布流程（未接入代码签名）。
+> 适用于 Gateway-tools 当前开源发布流程（未接入代码签名）。
 
 ## 1. 目标
 
@@ -29,11 +29,11 @@ npm run release:preflight
 node scripts/release/preflight.cjs --skip-locales --skip-typecheck --skip-build --skip-cargo
 ```
 
-## 3. 打包产物（macOS / Windows；Homebrew 推荐）
+## 3. 打包产物（macOS / Windows / Linux；Homebrew 推荐）
 
-官方发布目标仅包含 macOS 与 Windows，不再构建或上传 Linux/Ubuntu 安装包。macOS 当前推荐使用 `universal` 安装包（同时兼容 Apple Silicon / Intel），并在上传 GitHub Release 后同步更新 Homebrew cask。
+GitHub Actions 发布工作流会构建 macOS、Windows 与 Linux 资产。macOS 当前推荐使用 `universal` 安装包（同时兼容 Apple Silicon / Intel），并在上传 GitHub Release 后同步更新 Homebrew cask。
 
-推荐一键脚本（会执行 `universal.dmg` 构建、上传 GitHub Release 资产、更新 `Casks/cockpit-tools.rb`）：
+推荐一键脚本（会执行 `universal.dmg` 构建、上传 GitHub Release 资产、更新 `Casks/gateway-tools.rb`）：
 
 ```bash
 npm run release:github-and-cask
@@ -84,7 +84,7 @@ node scripts/release/gen_checksums.cjs \
 
 每次发布建议至少包含：
 
-1. 下载文件列表（macOS / Windows；macOS/Homebrew 场景建议包含 `*_universal.dmg`）
+1. 下载文件列表（macOS / Windows / Linux；macOS/Homebrew 场景建议包含 `*_universal.dmg`）
 2. `SHA256SUMS.txt`
 3. 更新日志（中英文）
 4. VirusTotal 链接（可选但推荐）
@@ -92,8 +92,8 @@ node scripts/release/gen_checksums.cjs \
 
 补充说明（Homebrew 自维护 Tap）：
 
-1. 先上传 GitHub Release 资产，再推送 `Casks/cockpit-tools.rb` 更新，避免 cask 链接短暂 404。
-2. `Casks/cockpit-tools.rb` 中的 `version`、`sha256` 必须与 Release 中实际 `*_universal.dmg` 一致。
+1. 先上传 GitHub Release 资产，再推送 `Casks/gateway-tools.rb` 更新，避免 cask 链接短暂 404。
+2. `Casks/gateway-tools.rb` 中的 `version`、`sha256` 必须与 Release 中实际 `*_universal.dmg` 一致。
 
 ## 6. VirusTotal 单引擎误报处理
 
