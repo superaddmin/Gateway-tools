@@ -196,7 +196,6 @@
 .log-entry-fab:hover {
   color: var(--text-primary);
   background: var(--bg-hover);
-  transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
 
@@ -212,7 +211,7 @@
   font-weight: 600;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
 }
 
 .update-quick-action-btn strong {
@@ -222,7 +221,6 @@
 }
 
 .update-quick-action-btn:hover {
-  transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
 
@@ -272,4 +270,90 @@
     left: 12px;
     bottom: 12px;
   }
+}
+
+/* Operational UI guardrails: keep high-frequency controls stable and compact. */
+:is(
+  .btn,
+  .btn-icon,
+  .action-btn,
+  .header-action-btn,
+  .card-action-btn,
+  .mini-icon-btn,
+  .filter-tab,
+  .view-btn,
+  .stat-card,
+  .account-card,
+  .accounts-page .accounts-grid .account-card,
+  .account-overview-card,
+  .codex-account-card,
+  .folder-inline-card,
+  .installed-version-badge,
+  .platform-group-switcher-trigger,
+  .log-entry-fab,
+  .update-quick-action-btn
+):hover {
+  transform: none !important;
+}
+
+:is(
+  .modal,
+  .qs-modal,
+  .codex-local-access-stats-modal,
+  .codex-local-access-hide-confirm-modal,
+  .codex-local-access-risk-notice-modal,
+  .codex-api-switch-notice-modal,
+  .codex-wakeup-runtime-guide-modal,
+  .quick-settings-popover,
+  .announcement-modal,
+  .log-viewer-modal
+) {
+  border-radius: var(--radius-modal) !important;
+}
+
+:is(
+  .toolbar,
+  .account-table-container,
+  .account-card,
+  .accounts-page .accounts-grid .account-card,
+  .account-overview-card,
+  .codex-account-card,
+  .codex-wakeup-hero,
+  .codex-wakeup-stat,
+  .codex-wakeup-runtime-card,
+  .codex-wakeup-install-card,
+  .cockpit-api-connection-card,
+  .cockpit-api-balance-card,
+  .cockpit-api-stat-card,
+  .cockpit-api-panel-section,
+  .folder-inline-card,
+  .folder-table-row,
+  .profile-card,
+  .quota-alert-modal-row,
+  .main-card,
+  .stat-card
+) {
+  border-radius: var(--radius-lg) !important;
+}
+
+:is(
+  .btn,
+  .btn-icon,
+  .action-btn,
+  .header-action-btn,
+  .card-action-btn,
+  .mini-icon-btn,
+  .folder-icon-btn,
+  .filter-tab,
+  .view-btn,
+  .nav-item,
+  .side-nav-more-item,
+  .side-nav-more-sub-item,
+  .platform-group-switcher-trigger,
+  .platform-group-switcher-option,
+  .platform-layout-row,
+  .platform-layout-child-row
+):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring-soft);
 }

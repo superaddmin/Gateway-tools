@@ -41,7 +41,7 @@
 
 @media (max-width: 640px) {
   .app-container {
-    padding: 18px;
+    padding: 0;
   }
 
   .page-heading h1 {

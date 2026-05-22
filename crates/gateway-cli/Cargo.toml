@@ -3,6 +3,7 @@ name = "gateway-cli"
 version = "0.1.0"
 edition = "2021"
 authors = ["superaddmin"]
+repository = "https://github.com/superaddmin/Gateway-tools.git"
 license = "CC-BY-NC-SA-4.0"
 
 [dependencies]

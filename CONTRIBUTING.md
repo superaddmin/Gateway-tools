@@ -7,7 +7,7 @@ Thank you for your interest in contributing to Gateway-tools! This project aims 
 1.  **Fork** the repository on GitHub.
 2.  **Clone** your fork locally:
     ```bash
-    git clone https://github.com/YOUR_USERNAME/gateway-tools.git
+    git clone https://github.com/YOUR_USERNAME/Gateway-tools.git
     ```
 3.  **Create a branch** for your feature or bug fix:
     ```bash

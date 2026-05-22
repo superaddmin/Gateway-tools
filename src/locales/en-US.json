@@ -904,7 +904,7 @@
       "codexAppSpeedLaunchFailed": "Failed to restart Codex: {{error}}"
     },
     "network": {
-      "apiTitle": "Antigravity Cockpit API",
+      "apiTitle": "Gateway-tools API",
       "wsService": "WebSocket Service",
       "wsServiceDesc": "Allow external programs (e.g., VS Code extension) to connect",
       "preferredPort": "Preferred Port",
@@ -933,7 +933,7 @@
       "firewallHint": "If the URL is unreachable, check your system firewall settings.",
       "proxyTitle": "Global Proxy",
       "proxyEnabled": "Enable Global Proxy",
-      "proxyEnabledDesc": "Inject proxy environment variables into managed platform processes launched by Cockpit.",
+      "proxyEnabledDesc": "Inject proxy environment variables into managed platform processes launched by Gateway-tools.",
       "proxyUrl": "Proxy URL",
       "proxyUrlDesc": "Example: http://127.0.0.1:7890 or socks5://127.0.0.1:7890",
       "proxyUrlPlaceholder": "http://127.0.0.1:7890",
@@ -1362,7 +1362,7 @@
       "importBtn": "Import",
       "oauthAction": "OAuth Authorization",
       "fromExtension": "Import from Plugin",
-      "syncBadge": "Sync Antigravity Cockpit plugin accounts",
+      "syncBadge": "Sync Gateway-tools plugin accounts",
       "fromLocalDB": "Import from Local DB",
       "localDBDesc": "Read login accounts from Antigravity IDE Client on this machine",
       "toolsDescMigrate": "Migrate accounts from ~/.antigravity_tools/",

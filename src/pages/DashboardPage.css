@@ -32,19 +32,20 @@
 /* Stats Row */
 .stats-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 10px;
 }
 
 .stat-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: var(--radius-lg);
+  padding: 10px 12px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  transition: all 0.2s ease;
+  gap: 10px;
+  min-height: 62px;
+  transition: background 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
   box-shadow: var(--shadow-sm);
 }
 
@@ -59,15 +60,14 @@
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   background: var(--bg-secondary);
 }
 
 .stat-icon-bg {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,15 +75,15 @@
 
 .stat-icon-trigger {
   cursor: pointer;
-  transition: transform 0.16s ease;
+  transition: background 0.16s ease, box-shadow 0.16s ease;
 }
 
 .stat-icon-trigger:hover {
-  transform: scale(1.07);
+  box-shadow: inset 0 0 0 1px currentColor;
 }
 
 .stat-icon-trigger:active {
-  transform: scale(0.95);
+  box-shadow: none;
 }
 
 .stat-icon-bg.primary { background: rgba(59, 130, 246, 0.1); color: var(--primary); }
@@ -105,7 +105,7 @@
 }
 
 .stat-value {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
@@ -152,15 +152,14 @@
 .cards-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
 .cards-split-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  /* Auto height based on content, or min-height */
-  min-height: 400px; 
+  gap: 12px;
+  min-height: 0;
 }
 
 .cards-split-row.single-platform-row {
@@ -170,7 +169,7 @@
 .main-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -191,7 +190,7 @@
 }
 
 .main-card-header {
-  padding: 16px 20px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--border-light);
   display: flex;
   justify-content: space-between;
@@ -203,13 +202,13 @@
 .header-title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: var(--text-primary);
 }
 
 .header-title h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -218,8 +217,8 @@
   background: var(--bg-card, #ffffff);
   border: 1px solid var(--border-medium, #dce0e5);
   color: var(--text-primary, #333);
-  height: 28px;
-  padding: 0 10px;
+  height: 26px;
+  padding: 0 8px;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -247,7 +246,7 @@
 .header-action-group {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .main-card-collapsible .split-content,
@@ -328,16 +327,16 @@
   display: flex;
   flex: 1;
   padding: 0;
-  height: 100%;
+  height: auto;
   overflow: hidden;
 }
 
 .split-half {
   flex: 1;
-  padding: 12px; /* Reduced from 20px */
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   min-width: 0;
   position: relative;
 }
@@ -357,7 +356,7 @@
 }
 
 .half-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -371,13 +370,14 @@
 .account-mini-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px; /* Reduced even more */
+  border-radius: var(--radius-md);
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   flex: 1;
   box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  min-height: 150px;
 }
 
 .empty-slot {
@@ -387,7 +387,7 @@
   height: 100%;
   color: var(--text-muted);
   background: var(--bg-tertiary);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px dashed var(--border);
 }
 
@@ -407,7 +407,7 @@
 }
 
 .account-email {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-primary);
   white-space: nowrap;
@@ -526,14 +526,14 @@
 .account-mini-quotas {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   margin-top: 0px; /* Fixed spacing from top elements instead of auto */
   margin-bottom: 0px;
 }
 
 /* 配额滑动窗口容器 */
 .account-mini-quotas.quota-scroll-container {
-  max-height: 180px;
+  max-height: 118px;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 4px;
@@ -558,7 +558,7 @@
 
 /* 配额项行 */
 .quota-item-row {
-  padding: 8px 0;
+  padding: 5px 0;
   border-bottom: 1px dashed var(--border-light);
 }
 
@@ -635,7 +635,7 @@
 /* Mini Action Buttons Row */
 .account-mini-actions {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   border-top: 1px dashed var(--border-light); /* Add separator */
   padding-top: 8px; /* Increase to push buttons down for centering */
   margin-top: auto; /* Push to bottom to fill remaining space */
@@ -800,9 +800,9 @@
 
 /* Card Bottom Action - Rounded Floating Style */
 .card-footer-action {
-  width: calc(100% - 24px); /* Fill width minus margin (12px * 2) */
-  margin: 0 12px 12px 12px; /* Floating from bottom and sides */
-  padding: 8px 0;
+  width: calc(100% - 20px);
+  margin: 0 10px 10px;
+  padding: 7px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -817,12 +817,45 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
 }
 
 .card-footer-action:hover {
   background: rgba(29, 78, 216, 0.2);
   border-color: rgba(29, 78, 216, 0.3);
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
+}
+
+@media (max-width: 1100px) {
+  .cards-split-row {
+    grid-template-columns: 1fr;
+  }
+
+  .main-card.main-card-placeholder {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-top-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-card {
+    min-height: 56px;
+  }
+
+  .split-content {
+    flex-direction: column;
+  }
+
+  .split-divider {
+    width: auto;
+    height: 1px;
+  }
 }

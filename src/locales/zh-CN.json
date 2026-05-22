@@ -904,7 +904,7 @@
       "codexAppSpeedLaunchFailed": "重启 Codex 失败：{{error}}"
     },
     "network": {
-      "apiTitle": "反重力驾驶舱 API",
+      "apiTitle": "Gateway-tools API",
       "wsService": "WebSocket 服务",
       "wsServiceDesc": "允许外部程序（如 VS Code 插件）连接控制",
       "preferredPort": "首选端口",
@@ -933,7 +933,7 @@
       "firewallHint": "如果访问不了，请检查系统防火墙设置。",
       "proxyTitle": "全局代理",
       "proxyEnabled": "启用全局代理",
-      "proxyEnabledDesc": "对 Cockpit 启动的受管平台进程统一注入代理环境变量",
+      "proxyEnabledDesc": "对 Gateway-tools 启动的受管平台进程统一注入代理环境变量",
       "proxyUrl": "代理地址",
       "proxyUrlDesc": "示例：http://127.0.0.1:7890 或 socks5://127.0.0.1:7890",
       "proxyUrlPlaceholder": "例如：http://127.0.0.1:7890",
@@ -1362,7 +1362,7 @@
       "importBtn": "导入",
       "oauthAction": "OAuth 授权",
       "fromExtension": "从插件导入",
-      "syncBadge": "同步 Antigravity Cockpit 插件账号",
+      "syncBadge": "同步 Gateway-tools 插件账号",
       "fromLocalDB": "从本地数据库导入",
       "localDBDesc": "读取本机 Antigravity IDE 客户端登录账号",
       "toolsDescMigrate": "从 ~/.antigravity_tools/ 迁移历史账号",

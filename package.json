@@ -3,6 +3,15 @@
   "private": true,
   "version": "0.24.3",
   "type": "module",
+  "author": "superaddmin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/superaddmin/Gateway-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/superaddmin/Gateway-tools/issues"
+  },
+  "homepage": "https://github.com/superaddmin/Gateway-tools#readme",
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc --noEmit",

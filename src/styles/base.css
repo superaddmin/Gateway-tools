@@ -2,7 +2,7 @@
 
 /* ============================================
    Gateway-tools - Design System
-   Brand Direction: floating dashboard with soft gradients
+   Brand Direction: compact operational dashboard
    ============================================ */
 
 :root {
@@ -40,11 +40,13 @@
   /* Border Colors */
   --border: rgba(15, 23, 42, 0.12);
   --border-light: rgba(15, 23, 42, 0.08);
+  --focus-ring: #2563eb;
+  --focus-ring-soft: rgba(37, 99, 235, 0.18);
 
   /* Shadows */
-  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.08);
-  --shadow-md: 0 12px 24px rgba(15, 23, 42, 0.12);
-  --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.18);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 8px 18px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 14px 30px rgba(15, 23, 42, 0.14);
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #1d4ed8 0%, #0ea5a5 100%);
@@ -52,10 +54,11 @@
   --gradient-danger: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
 
   /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-modal: 14px;
   --radius-full: 9999px;
 
   /* Component sizing */
@@ -94,11 +97,13 @@
   /* Border Colors */
   --border: rgba(255, 255, 255, 0.12);
   --border-light: rgba(255, 255, 255, 0.06);
+  --focus-ring: #60a5fa;
+  --focus-ring-soft: rgba(96, 165, 250, 0.24);
 
   /* Shadows - darker */
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 18px rgba(0, 0, 0, 0.32);
+  --shadow-lg: 0 14px 30px rgba(0, 0, 0, 0.42);
 
   color-scheme: dark;
 }
@@ -107,6 +112,38 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+button,
+input,
+select,
+textarea,
+a,
+[role='button'],
+[tabindex]:not([tabindex='-1']) {
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible,
+[role='button']:focus-visible,
+[tabindex]:not([tabindex='-1']):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {

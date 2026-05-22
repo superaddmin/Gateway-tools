@@ -3,6 +3,7 @@ name = "gateway-tools"
 version = "0.24.3"
 description = "Gateway-tools"
 authors = ["superaddmin"]
+repository = "https://github.com/superaddmin/Gateway-tools.git"
 license = "CC-BY-NC-SA-4.0"
 edition = "2021"
 
