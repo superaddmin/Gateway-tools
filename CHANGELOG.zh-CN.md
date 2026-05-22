@@ -7,6 +7,12 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
 ---
+## [0.24.9] - 2026-05-22
+
+### 修复
+- **Homebrew cask 更新不再依赖仓库允许 Actions 创建 PR 的权限**：发布工作流会在 Release 发布后直接把 cask 更新提交到 `main`，并且仓库内 cask 元数据已对齐已发布的 v0.24.8 universal DMG。
+
+---
 ## [0.24.8] - 2026-05-22
 
 ### 修复

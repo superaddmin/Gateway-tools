@@ -7,6 +7,12 @@ All notable changes to Gateway-tools will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.24.9] - 2026-05-22
+
+### Fixed
+- **Homebrew cask update no longer requires repository Actions PR permissions**: the release workflow now commits the cask update directly to `main` after the release is published, and the bundled cask metadata is aligned to the published v0.24.8 universal DMG.
+
+---
 ## [0.24.8] - 2026-05-22
 
 ### Fixed
