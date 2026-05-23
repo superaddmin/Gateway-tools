@@ -14,7 +14,6 @@ import { getCurrentWebview } from '@tauri-apps/api/webview';
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
 import { invoke } from '@tauri-apps/api/core';
 import { open } from '@tauri-apps/plugin-dialog';
-import { openUrl } from '@tauri-apps/plugin-opener';
 import { useTranslation } from 'react-i18next';
 import { FileText, FolderOpen, RefreshCw, X } from 'lucide-react';
 import { SideNav } from './components/layout/SideNav';
@@ -71,6 +70,9 @@ const AccountsPage = lazy(() =>
 );
 const CodexAccountsPage = lazy(() =>
   import('./pages/CodexAccountsPage').then((module) => ({ default: module.CodexAccountsPage })),
+);
+const CodexApiServicePage = lazy(() =>
+  import('./pages/CodexApiServicePage').then((module) => ({ default: module.CodexApiServicePage })),
 );
 const GitHubCopilotAccountsPage = lazy(() =>
   import('./pages/GitHubCopilotAccountsPage').then((module) => ({
@@ -536,17 +538,6 @@ function MainApp() {
     setPlatformLayoutRequestedGroupId(null);
     setShowPlatformLayoutModal(true);
   }, []);
-  const handleTopRightAdClick = useCallback(async () => {
-    const target = topRightAdState.ad?.ctaUrl?.trim();
-    if (!target || !/^https?:\/\//i.test(target)) {
-      return;
-    }
-    try {
-      await openUrl(target);
-    } catch {
-      window.open(target, '_blank', 'noopener,noreferrer');
-    }
-  }, [topRightAdState.ad?.ctaUrl]);
   const openBreakout = useCallback(() => {
     setHasBreakoutSession(true);
     setShowBreakout(true);
@@ -2773,6 +2764,7 @@ function MainApp() {
           switch (target) {
             case 'overview':
             case 'codex':
+            case 'codex-api-service':
             case 'github-copilot':
             case 'windsurf':
             case 'kiro':
@@ -3185,11 +3177,6 @@ function MainApp() {
                       <div className="global-promo-main">
                         <p className="global-promo-text">{topRightAdState.ad.text}</p>
                       </div>
-                      {topRightAdState.ad.ctaUrl ? (
-                        <button className="global-ad-slot-action" onClick={handleTopRightAdClick}>
-                          {topRightAdState.ad.ctaLabel || t('common.topRightAd.action', '查看详情')}
-                        </button>
-                      ) : null}
                     </div>
                   </div>
                 ) : null
@@ -3198,6 +3185,7 @@ function MainApp() {
           )}
           {page === 'overview' && <AccountsPage onNavigate={setPage} />}
           {page === 'codex' && <CodexAccountsPage />}
+          {page === 'codex-api-service' && <CodexApiServicePage />}
           {page === 'github-copilot' && <GitHubCopilotAccountsPage />}
           {page === 'windsurf' && <WindsurfAccountsPage />}
           {page === 'kiro' && <KiroAccountsPage />}

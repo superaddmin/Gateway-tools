@@ -9,8 +9,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ---
 ## [0.24.10] - 2026-05-23
 
+### Added
+- **Synced upstream Cockpit Tools v0.24.4 Codex API Service updates**: the dedicated Codex API Service page, named API keys, routing controls, health tracking, request logs, image-generation compatibility, and related Codex local-access improvements have been merged into Gateway-tools.
+
 ### Changed
 - **Prepared Tauri updater key rotation**: `tauri.conf.json` now trusts the newly generated updater public key. Publish this version as a transition release signed with the old private key, then switch GitHub Actions to the new private key for the following release.
+- **Development runs now have an isolated Gateway-tools Dev profile**: `npm run tauri:dev` starts the dev app with its own Tauri identifier, data directory, API port, and window branding.
+
+### Fixed
+- **Codex access-token-only and session-token imports no longer get forced into reauthorization because `refresh_token` is missing**: imports accept `session_token`/`sessionToken`, managed projections keep the expected `refresh_token` field, and proactive refresh skips accounts that cannot refresh.
+- **Dashboard and platform switching now keep grouped Antigravity/Codex entries consistent**: grouped cards are deduplicated, Codex API Service navigation stays inside the Codex group, and the switcher no longer treats the current extra page as a platform mismatch.
 
 ---
 ## [0.24.9] - 2026-05-22

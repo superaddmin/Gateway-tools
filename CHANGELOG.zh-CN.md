@@ -9,8 +9,16 @@
 ---
 ## [0.24.10] - 2026-05-23
 
+### 新增
+- **同步上游 Cockpit Tools v0.24.4 的 Codex API 服务更新**：Codex API 服务独立管理页、命名 API Key、调度配置、健康状态、请求日志、图片生成兼容能力以及相关本地访问改进已合入 Gateway-tools。
+
 ### 变更
 - **准备 Tauri updater 密钥轮换**：`tauri.conf.json` 现信任新生成的 updater 公钥。本版本应作为过渡版本继续使用旧私钥签名发布，下一版再将 GitHub Actions 切换到新私钥。
+- **开发运行现使用独立 Gateway-tools Dev 配置**：`npm run tauri:dev` 会以独立 Tauri 标识、数据目录、API 端口和窗口品牌启动开发版应用。
+
+### 修复
+- **Codex 仅 access token 与 session token 导入不再因为缺少 `refresh_token` 被强制要求重新授权**：导入会识别 `session_token`/`sessionToken`，受管投影会保留预期的 `refresh_token` 字段，且无法刷新的账号会跳过主动续期。
+- **仪表盘与平台切换现保持 Antigravity/Codex 分组条目一致**：分组卡片会去重，Codex API 服务导航保留在 Codex 分组内，切换器也不再把当前额外页面误判为平台不匹配。
 
 ---
 ## [0.24.9] - 2026-05-22

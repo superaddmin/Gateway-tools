@@ -21,6 +21,8 @@
     "release:github-and-cask": "node scripts/release/publish_github_release_and_cask.cjs",
     "release:checksums": "node scripts/release/gen_checksums.cjs",
     "preview": "vite preview",
+    "pretauri:dev": "npm run typecheck",
+    "tauri:dev": "node scripts/tauri-dev.cjs",
     "pretauri": "npm run typecheck",
     "tauri": "npm run sync-version && tauri",
     "sync-version": "node scripts/sync-version.js"
